@@ -2,7 +2,6 @@
 
 <script>
 <% if @conversation.people.present? %>
-  console.log("this ran")
   window.people = <%= raw(@conversation.people.map(&:name)) %>;
 <% end %>
 </script>

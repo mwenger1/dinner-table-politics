@@ -8,6 +8,7 @@ angular.module("speaking").controller(
       $scope.chooseTopic = false;
       $scope.topic = undefined;
       setTimeout(greeting, 500)
+      $scope.recognition = initializeSpeechRecognition();
 
       $scope.getStarted = function(){
         responsiveVoice.pause();
@@ -15,6 +16,32 @@ angular.module("speaking").controller(
         resetCurrentPlayer();
         chooseTopic();
       }
+
+      function initializeSpeechRecognition(){
+        let final_transcript;
+        let recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.onresult = function(event) {
+          var interim_transcript = '';
+
+          for (var i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+              final_transcript += event.results[i][0].transcript;
+            } else {
+              interim_transcript += event.results[i][0].transcript;
+            }
+          }
+          console.log(final_transcript);
+        }
+
+        recognition.start();
+        return recognition;
+      }
+
+      //function capitalize(s) {
+        //return s.replace(first_char, function(m) { return m.toUpperCase(); });
+      //}
 
       function chooseTopic(){
         $scope.chooseTopic = true;
