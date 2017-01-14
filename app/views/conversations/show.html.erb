@@ -1,5 +1,6 @@
 <div ng-controller="ConversationController">
   <div ng-show="newGame">
+    <p><%= @conversation.people.map(&:name).join(" + ") %></p>
     <h1>Rules</h1>
 
     <ol>
@@ -8,7 +9,6 @@
       <li>Be Nice
     </ol>
 
-    <%= @conversation.people.map(&:name).join(" + ") %>
 
     <button ng-click="getStarted()">Go</button>
   </div>
