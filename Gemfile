@@ -20,7 +20,6 @@ gem "sprockets", ">= 3.0.0"
 gem "suspenders"
 gem "title"
 gem "uglifier"
-gem 'sprockets-es6'
 
 source "https://rails-assets.org" do
   gem "rails-assets-angular"
