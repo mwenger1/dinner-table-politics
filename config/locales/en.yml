@@ -17,3 +17,7 @@ en:
 
   titles:
     application: App
+  helpers:
+    submit:
+      conversation:
+        create: "Start Conversation"

@@ -1,8 +1,14 @@
 <%= javascript_include_tag :application %>
 
+<script>
+<% if @conversation.people.present? %>
+  console.log("this ran")
+  window.people = <%= raw(@conversation.people.map(&:name)) %>;
+<% end %>
+</script>
+
 <%= yield :javascript %>
 
-<%= render "analytics" %>
 
 <% if Rails.env.test? %>
   <%= javascript_tag do %>

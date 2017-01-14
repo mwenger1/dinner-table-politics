@@ -1,10 +1,7 @@
-Who's joining the conversation today?
-
-<% simple_form_for @conversation do |f| %>
-  <%= f.fields_for @conversation.people do |fp| %>
-    <%= fp.input :name %>
+<%= simple_form_for @conversation do |f| %>
+  Who's joining the conversation today?
+  <%= f.fields_for :people do |fp| %>
+    <%= fp.input :name, label: false, placeholder: "Name" %>
   <% end %>
   <%= f.submit %>
 <% end %>
-
-Hello world!

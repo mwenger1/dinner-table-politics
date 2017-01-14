@@ -21,6 +21,10 @@ gem "suspenders"
 gem "title"
 gem "uglifier"
 
+source "https://rails-assets.org" do
+  gem "rails-assets-angular"
+end
+
 group :development do
   gem "listen"
   gem "spring"

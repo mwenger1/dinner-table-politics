@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   root to: "conversations#new"
 
-  resources :conversation, only: [:new, :create]
+  resources :conversations, only: [:new, :create, :show]
 end

@@ -1,0 +1,15 @@
+<div ng-controller="ConversationController">
+  <div ng-show="newGame">
+    <h1>Rules</h1>
+
+    <ol>
+      <li>Let's discuss issues</li>
+      <li>Listen and have empathy
+      <li>Be Nice
+    </ol>
+
+    <%= @conversation.people.map(&:name).join(" + ") %>
+
+    <button ng-click="getStarted()">Go</button>
+  </div>
+</div>
