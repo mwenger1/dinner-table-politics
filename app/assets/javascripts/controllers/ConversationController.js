@@ -1,6 +1,6 @@
 angular.module("speaking").controller(
   "ConversationController",
-  function($scope) {
+  ["$scope", function($scope) {
     $scope.newGame = true;
     setTimeout(greeting, 500)
 
@@ -39,4 +39,5 @@ angular.module("speaking").controller(
       responsiveVoice.speak(message);
     }
   }
+  ]
 )
