@@ -1,15 +1,44 @@
 <div ng-controller="ConversationController">
   <div ng-show="newGame">
-    <p><%= @conversation.people.map(&:name).join(" + ") %></p>
+    <heaader>
+      <p>{{ player1 }} and {{ player2 }}</p>
+    </header>
+
     <h1>Rules</h1>
 
     <ol>
-      <li>Let's discuss issues</li>
+      <li>Let's discuss issues
       <li>Listen and have empathy
       <li>Be Nice
     </ol>
 
 
     <button ng-click="getStarted()">Go</button>
+  </div>
+
+  <div ng-show="chooseTopic">
+    <heaader>
+      <p>{{ currentPlayer }}</p>
+    </header>
+    <h1>
+    </h1>
+
+    <p>Some Issues to Consider</p>
+    <ul>
+      <li>Abortion
+      <li>Civil Rights
+      <li>Climate Change
+      <li>Economic Policy
+      <li>Education
+      <li>Foreign Policy
+      <li>Goverment Programs
+      <li>Gun Control
+      <li>Healthcare
+      <li>Immigration
+      <li>Taxes
+      <li>Trade
+    </ul>
+
+    <button ng-click="finishedPresentingIssue()">Done Presenting</button>
   </div>
 </div>
