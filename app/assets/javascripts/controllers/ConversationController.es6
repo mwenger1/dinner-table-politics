@@ -23,25 +23,16 @@ angular.module("speaking").controller(
         recognition.continuous = true;
         recognition.interimResults = true;
         recognition.onresult = function(event) {
-          var interim_transcript = '';
+          let interim_transcript = '';
 
           for (var i = event.resultIndex; i < event.results.length; ++i) {
-            if (event.results[i].isFinal) {
-              final_transcript += event.results[i][0].transcript;
-            } else {
-              interim_transcript += event.results[i][0].transcript;
-            }
+            console.warn(event.results[i][0].transcript);
           }
-          console.log(final_transcript);
         }
 
         recognition.start();
         return recognition;
       }
-
-      //function capitalize(s) {
-        //return s.replace(first_char, function(m) { return m.toUpperCase(); });
-      //}
 
       function chooseTopic(){
         $scope.chooseTopic = true;
