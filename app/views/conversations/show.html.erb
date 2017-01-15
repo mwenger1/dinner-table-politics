@@ -1,6 +1,6 @@
-<div ng-controller="ConversationController">
+<div ng-controller="ConversationController" ng-cloak>
   <div ng-show="newGame">
-    <heaader>
+    <header>
       <p>{{ player1 }} and {{ player2 }}</p>
     </header>
 
@@ -16,8 +16,8 @@
     <button ng-click="getStarted()">Go</button>
   </div>
 
-  <div ng-show="chooseTopic">
-    <heaader>
+  <div ng-show="chooseIssue">
+    <header>
       <p>{{ currentPlayer }}</p>
     </header>
     <h1>
@@ -38,6 +38,8 @@
       <li>Taxes
       <li>Trade
     </ul>
+
+    <p>You selected {{ issue }}</p>
 
     <button ng-click="finishedPresentingIssue()">Done Presenting</button>
   </div>

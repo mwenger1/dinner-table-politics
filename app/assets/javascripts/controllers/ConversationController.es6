@@ -5,41 +5,83 @@ angular.module("speaking").controller(
       $scope.player1 = window.people[0];
       $scope.player2 = window.people[1];
       $scope.newGame = true;
-      $scope.chooseTopic = false;
+      $scope.chooseIssue = false;
       $scope.topic = undefined;
       setTimeout(greeting, 500)
-      $scope.recognition = initializeSpeechRecognition();
+      $scope.issues = [
+        "Abortion",
+        "Civil Rights",
+        "Climate Change",
+        "Economic Policy",
+        "Education",
+        "Foreign Policy",
+        "Goverment Programs",
+        "Gun Control",
+        "Healthcare",
+        "Immigration",
+        "Taxes",
+        "Trade",
+      ]
 
       $scope.getStarted = function(){
         responsiveVoice.pause();
         $scope.newGame = false;
         resetCurrentPlayer();
-        chooseTopic();
+        chooseIssue();
       }
 
       function initializeSpeechRecognition(){
-        let final_transcript;
-        let recognition = new webkitSpeechRecognition();
+        window.recognition = new webkitSpeechRecognition();
         recognition.continuous = true;
         recognition.interimResults = true;
+
+        return window.recognition;
+      }
+
+      function chooseIssue(){
+        $scope.chooseIssue = true;
+        identifyIssue();
+        setTimeout(askIssue, 1500)
+      }
+
+      function identifyIssue(){
+        return listenForText($scope.issues);
+      }
+
+      function listenForText(text_strings){
+        recognition = initializeSpeechRecognition();
         recognition.onresult = function(event) {
           let interim_transcript = '';
 
+          $scope.issue = "Civil Rights";
+          $scope.$apply();
           for (var i = event.resultIndex; i < event.results.length; ++i) {
-            console.warn(event.results[i][0].transcript);
+            let eventTranscript = event.results[i][0].transcript;
+            let matches = containsAny(eventTranscript, text_strings);
+            console.warn(matches);
+            if(matches){
+              $scope.issue = matches;
+            }
+            console.warn(eventTranscript);
           }
         }
-
         recognition.start();
+
         return recognition;
       }
 
-      function chooseTopic(){
-        $scope.chooseTopic = true;
-        setTimeout(askTopic, 1500)
+      function containsAny(str, substrings) {
+        var str = str.toLowerCase();
+        for (var i = 0; i != substrings.length; i++) {
+          var substring = substrings[i].toLowerCase();
+          if (str.indexOf(substring) != - 1) {
+            return substring;
+          }
+        }
+        return null;
       }
 
-      function askTopic(){
+      function askIssue(){
         let message = `${$scope.currentPlayer}, what issue are you most concerned about?`;
         talk(message);
       }
@@ -60,13 +102,11 @@ angular.module("speaking").controller(
 
       function explainRules(){
         let message = `
-          My name is Anne and my goal is to make sure your political discussion is friendly and fruitful.
-          There's a few ground rules for us all to follow, and I'll be chiming in when I think their might be a violation.
-          Rule 1. Let’s discuss the issues of the day and leave personal scandals out of it.
-          Rule 2. Let's make sure we listen to each other. When it's your turn to respond, pause
-          and reflect on what the other person has said.
-          Rule 3. This is the most important rule. Name calling and inflammatory language will
-          not be tolerated.
+          My goal is to help you have a constructive, political discussion.
+          There's a few ground rules to follow and I will chime in when they are broken.
+          Rule 1. Discuss issues, not personal scandals.
+          Rule 2. Listen to each other and lead with followup questions rather than defensive statements.
+          Rule 3. Avoid attacks and hurtful language.
         `
 
         talk(message);
@@ -85,6 +125,7 @@ angular.module("speaking").controller(
       function talk(message){
         responsiveVoice.speak(message);
       }
+
     }
   ]
 )
