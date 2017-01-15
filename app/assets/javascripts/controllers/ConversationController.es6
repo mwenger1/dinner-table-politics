@@ -8,7 +8,7 @@ angular.module("speaking").controller(
       $scope.chooseIssue = false;
       $scope.topic = undefined;
       $scope.voice = responsiveVoice;
-      setTimeout(greeting, 500)
+      setTimeout(greeting, 3000)
       $scope.issues = [
         "Abortion",
         "Civil Rights",
