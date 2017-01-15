@@ -35,11 +35,12 @@
 
   <div ng-show="issue">
     <p>{{ currentPlayer}} is talking about {{ issue }}</p>
+    <button ng-click="swapPlayer()">Swap</button>
   </div>
 
   <div class="overlay warning" ng-show="bannedWord">
     Possible Violation of Ground Rules:
     {{ bannedWord }}
-    <button ng-click="ignoreBannedWord">Skip</button>
+    <button ng-click="ignoreBannedWord()">Skip</button>
   </div>
 </div>

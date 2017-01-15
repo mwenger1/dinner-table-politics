@@ -46,6 +46,10 @@ angular.module("speaking").controller(
         $scope.bannedWord = undefined;
       }
 
+      $scope.swapPlayer = function(){
+        resetCurrentPlayer();
+      }
+
       function initializeSpeechRecognition(){
         window.recognition = new webkitSpeechRecognition();
         recognition.continuous = true;
