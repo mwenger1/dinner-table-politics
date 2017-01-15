@@ -17,3 +17,12 @@
 [ng-cloak] {
   display: none !important;
 }
+
+.overlay {
+  position: absolute;
+}
+
+.warning {
+  color: red;
+}
+

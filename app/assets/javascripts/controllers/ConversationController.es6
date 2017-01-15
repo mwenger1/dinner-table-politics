@@ -26,7 +26,7 @@ angular.module("speaking").controller(
 
       $scope.bannedWords = [
         "f***",
-        "golden showers",
+        "golden shower",
         "lock her up",
         "pussy",
         "prostitute",
@@ -83,6 +83,17 @@ angular.module("speaking").controller(
       function setIssue(issue){
         $scope.chooseIssue = false;
         $scope.issue = issue;
+        $scope.$apply();
+        monitorResponse();
+      }
+
+      function monitorResponse(){
+        listenForText($scope.bannedWords, raiseAlert);
+      }
+
+      function raiseAlert(word){
+        console.warn(`A banned word was said ${word}`);
+        $scope.bannedWord = word;
         $scope.$apply();
       }
 

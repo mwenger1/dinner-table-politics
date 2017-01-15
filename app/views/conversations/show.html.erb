@@ -36,4 +36,9 @@
   <div ng-show="issue">
     <p>{{ currentPlayer}} selected {{ issue }}</p>
   </div>
+
+  <div class="overlay warning" ng-show="bannedWord">
+    Possible Violation of Ground Rules:
+    {{ bannedWord }}
+  </div>
 </div>
