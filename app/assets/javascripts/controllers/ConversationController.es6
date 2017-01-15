@@ -57,20 +57,21 @@ angular.module("speaking").controller(
       }
 
       function identifyIssue(){
-        return listenForText($scope.issues);
+        return listenForText($scope.issues, setIssue);
       }
 
-      function listenForText(text_strings){
+      function listenForText(text_strings, callback){
         recognition = initializeSpeechRecognition();
         recognition.onresult = function(event) {
           let interim_transcript = '';
 
           for (var i = event.resultIndex; i < event.results.length; ++i) {
             let eventTranscript = event.results[i][0].transcript;
-            let issue = containsAny(eventTranscript, text_strings);
-            if(issue){
+            console.warn(eventTranscript);
+            let match = containsAny(eventTranscript, text_strings);
+            if(match){
               recognition.stop();
-              setIssue(issue);
+              callback(match);
             }
           }
         }
