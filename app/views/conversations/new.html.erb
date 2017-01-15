@@ -5,4 +5,10 @@
   <% end %>
   <%= f.submit %>
 <% end %>
-<input onclick='responsiveVoice.speak("Hello World");' type='button' value='🔊 Play' />
+<input onclick='talk()' type='button' value='🔊 Play' />
+<script>
+function talk(){
+var u = new SpeechSynthesisUtterance('You have reached your destination');
+    speechSynthesis.speak(u);
+}
+
