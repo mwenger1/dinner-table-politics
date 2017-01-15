@@ -7,6 +7,7 @@ angular.module("speaking").controller(
       $scope.newGame = true;
       $scope.chooseIssue = false;
       $scope.topic = undefined;
+      $scope.voice = responsiveVoice;
       setTimeout(greeting, 500)
       $scope.issues = [
         "Abortion",
@@ -24,7 +25,7 @@ angular.module("speaking").controller(
       ]
 
       $scope.getStarted = function(){
-        responsiveVoice.pause();
+        $scope.voice.pause();
         $scope.newGame = false;
         resetCurrentPlayer();
         chooseIssue();
@@ -123,7 +124,7 @@ angular.module("speaking").controller(
       }
 
       function talk(message){
-        responsiveVoice.speak(message);
+        $scope.voice.speak(message);
       }
 
     }
