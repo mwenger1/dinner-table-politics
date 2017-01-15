@@ -8,7 +8,7 @@ angular.module("speaking").controller(
       $scope.chooseIssue = false;
       $scope.topic = undefined;
       $scope.voice = responsiveVoice;
-      setTimeout(greeting, 3000)
+      setTimeout(greeting, 1500)
       $scope.issues = [
         "Abortion",
         "Civil Rights",
@@ -40,6 +40,10 @@ angular.module("speaking").controller(
         $scope.newGame = false;
         resetCurrentPlayer();
         chooseIssue();
+      }
+
+      $scope.ignoreBannedWord = function(){
+        $scope.bannedWord = undefined;
       }
 
       function initializeSpeechRecognition(){
@@ -132,7 +136,7 @@ angular.module("speaking").controller(
           My goal is to help you have a constructive, political discussion.
           There's a few ground rules to follow and I will chime in when they are broken.
           Rule 1. Discuss issues, not personal scandals.
-          Rule 2. Listen to each other and lead with followup questions rather than defensive statements.
+          Rule 2. Listen to each other and offer followup questions rather than defensive statements.
           Rule 3. Avoid attacks and hurtful language.
         `
 
