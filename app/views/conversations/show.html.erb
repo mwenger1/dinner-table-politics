@@ -31,9 +31,9 @@
       <li>Taxes
       <li>Trade
     </ul>
+  </div>
 
-    <p>You selected {{ issue }}</p>
-
-    <button ng-click="finishedPresentingIssue()">Done Presenting</button>
+  <div ng-show="issue">
+    <p>{{ currentPlayer}} selected {{ issue }}</p>
   </div>
 </div>

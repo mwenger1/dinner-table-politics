@@ -24,6 +24,17 @@ angular.module("speaking").controller(
         "Trade",
       ]
 
+      $scope.bannedWords = [
+        "f***",
+        "golden showers",
+        "lock her up",
+        "pussy",
+        "prostitute",
+        "moron",
+        "idiot",
+        "retarted",
+      ]
+
       $scope.getStarted = function(){
         $scope.voice.pause();
         $scope.newGame = false;
@@ -54,21 +65,24 @@ angular.module("speaking").controller(
         recognition.onresult = function(event) {
           let interim_transcript = '';
 
-          $scope.issue = "Civil Rights";
-          $scope.$apply();
           for (var i = event.resultIndex; i < event.results.length; ++i) {
             let eventTranscript = event.results[i][0].transcript;
-            let matches = containsAny(eventTranscript, text_strings);
-            console.warn(matches);
-            if(matches){
-              $scope.issue = matches;
+            let issue = containsAny(eventTranscript, text_strings);
+            if(issue){
+              recognition.stop();
+              setIssue(issue);
             }
-            console.warn(eventTranscript);
           }
         }
         recognition.start();
 
         return recognition;
+      }
+
+      function setIssue(issue){
+        $scope.chooseIssue = false;
+        $scope.issue = issue;
+        $scope.$apply();
       }
 
       function containsAny(str, substrings) {
